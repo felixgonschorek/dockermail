@@ -33,6 +33,9 @@ mydestination = /etc/mailname, localhost.localdomain, localhost
 relayhost =
 mynetworks = 127.0.0.0/8 172.0.0.0/8
 mailbox_size_limit = 0
+message_size_limit = 0
+virtual_mailbox_limit = 0
+
 recipient_delimiter = +
 
 # SMTP configuration for incoming mail (port 25)
