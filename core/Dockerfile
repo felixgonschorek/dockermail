@@ -1,10 +1,10 @@
-FROM ubuntu:15.10
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN locale-gen en_GB en_GB.UTF-8 && dpkg-reconfigure locales
 
 # Prerequisites
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     rsyslog \
     ssl-cert \
     postfix \
