@@ -1,10 +1,10 @@
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN locale-gen en_GB en_GB.UTF-8 && dpkg-reconfigure locales
 
 # Prerequisites
 RUN apt update && apt install -y \
+    locales \
     rsyslog \
     ssl-cert \
     postfix \
@@ -13,6 +13,8 @@ RUN apt update && apt install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
+
+RUN locale-gen en_GB en_GB.UTF-8 && dpkg-reconfigure locales
 
 # Postfix configuration
 ADD ./config/postfix /etc/postfix/
