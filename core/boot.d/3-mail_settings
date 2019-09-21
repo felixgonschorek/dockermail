@@ -13,7 +13,8 @@ jq -r '.blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanent
 jq -r '.sender_blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanently banned/' > /etc/postfix/sender_blacklist
 
 # Process alias, blacklist and mailbox maps
-postmap /etc/postfix/blacklist
+postmap /etc/postfix/receiver_blacklist
+postmap /etc/postfix/sender_blacklist
 postmap /etc/postfix/virtual
 postmap /etc/postfix/virtual-mailbox-maps
 
