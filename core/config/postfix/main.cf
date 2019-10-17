@@ -62,6 +62,9 @@ smtpd_recipient_restrictions =
   check_sender_access hash:/etc/postfix/sender_blacklist
   check_recipient_access hash:/etc/postfix/receiver_blacklist
 
+# Allow simple regex blacklisting
+body_checks = regexp:/etc/postfix/body_checks
+
 # Delivery to dovecot
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
