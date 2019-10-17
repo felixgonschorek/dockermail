@@ -14,8 +14,6 @@ jq -r '.sender_blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are pe
 # Build regex blacklist (content)
 jq -r '.content_blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanently banned/' > /etc/postfix/body_checks
 
-> postmap /etc/postfix/body_checks
-
 # Process alias, blacklist and mailbox maps
 postmap /etc/postfix/receiver_blacklist
 postmap /etc/postfix/sender_blacklist
