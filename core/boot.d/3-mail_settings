@@ -11,10 +11,15 @@ jq -r '.domains | .[] | select(.[0] != null) | .[] | select(.password != null) |
 jq -r '.blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanently banned/' > /etc/postfix/receiver_blacklist
 # Build blacklist (sender)
 jq -r '.sender_blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanently banned/' > /etc/postfix/sender_blacklist
+# Build regex blacklist (content)
+jq -r '.content_blacklist | .[]' "$CONFIG_FILE" | sed -e 's/$/\tREJECT You are permanently banned/' > /etc/postfix/body_checks
+
+> postmap /etc/postfix/body_checks
 
 # Process alias, blacklist and mailbox maps
 postmap /etc/postfix/receiver_blacklist
 postmap /etc/postfix/sender_blacklist
+postmap /etc/postfix/body_checks
 postmap /etc/postfix/virtual
 postmap /etc/postfix/virtual-mailbox-maps
 
