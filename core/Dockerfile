@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
-
+ARG USERID=1000
+ARG GROUPID=1000
 ENV DEBIAN_FRONTEND noninteractive
 
 # Prerequisites
@@ -36,8 +37,8 @@ VOLUME ["/mail_settings"]
 VOLUME ["/vmail"]
 
 # Add user vmail that ownes mail
-RUN groupadd -g 5000 vmail
-RUN useradd -g vmail -u 5000 vmail -d /vmail -m
+RUN groupadd -g $GROUPID vmail
+RUN useradd -g vmail -u $USERID vmail -d /vmail -m
 
 EXPOSE 25 143 587 993
 CMD /boot; service postfix start; service dovecot start; rsyslogd -n
